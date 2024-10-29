@@ -5,9 +5,8 @@ player = data.Player(100, 100)
 print("As the king of this kingdom, you must make decisions that will affect the happiness and wealth of the kingdom. People may come to you to ask for your help or to ask for money, you may accept or reject their requests.")
 
 def play_the_damn_game():
-    npc_name = data.random_npc()
-    npc = data.gen_npc(npc_name)
-    print(f"{npc_name}: {npc.message}")
+    npc = data.gen_npc()
+    print(f"{npc.npc_name}: {npc.npc_message}")
     print(f"Accepting will result in: {npc.happinesschange[0]} happiness and {npc.wealthchange[0]} gold.")
     print(f"Declining will result in: {npc.happinesschange[1]} happiness and {npc.wealthchange[1]} gold.")
     happiness_change_on_accept = npc.happinesschange[0]
