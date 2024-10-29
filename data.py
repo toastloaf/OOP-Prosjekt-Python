@@ -60,7 +60,7 @@ class FriendlyWitch(npc):
 def random_npc():
     npc_list = [Robot, Warrior, Scientist, Orc, Parrot, Dragon, Mouse, ConstructionWorker, Farmer, Wizard, FriendlyWitch]
     selected_npc = random.choice(npc_list)
-    return selected_npc.__name__  # Return the name of the selected NPC class as a string
+    return selected_npc.__name__
 
 genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
 
