@@ -12,49 +12,49 @@ class npc:
         self.happinesschange = happinesschange
 
 class Robot(npc):
+    msgs = "RobotMsgs"
     def __init__(self, message, wealthchange, happinesschange):
         super().__init__(message, wealthchange, happinesschange)
-
 class Warrior(npc):
+    msgs = "WarriorMsgs"
     def __init__(self, message, wealthchange, happinesschange):
         super().__init__(message, wealthchange, happinesschange)
-
 class Scientist(npc):
+    msgs = "ScientistMsgs"
     def __init__(self, message, wealthchange, happinesschange):
         super().__init__(message, wealthchange, happinesschange)
-
 class Orc(npc):
+    msgs = "OrcMsgs"
     def __init__(self, message, wealthchange, happinesschange):
         super().__init__(message, wealthchange, happinesschange)
-
 class Parrot(npc):
+    msgs = "ParrotMsgs"
     def __init__(self, message, wealthchange, happinesschange):
         super().__init__(message, wealthchange, happinesschange)
-
 class Dragon(npc):
+    msgs = "DragonMsgs"
     def __init__(self, message, wealthchange, happinesschange):
         super().__init__(message, wealthchange, happinesschange)
-
 class Mouse(npc):
+    msgs = "MouseMsgs"
     def __init__(self, message, wealthchange, happinesschange):
         super().__init__(message, wealthchange, happinesschange)
-
 class ConstructionWorker(npc):
+    msgs = "ConstructionWorkerMsgs"
     def __init__(self, message, wealthchange, happinesschange):
         super().__init__(message, wealthchange, happinesschange)
-
 class Farmer(npc):
+    msgs = "FarmerMsgs"
     def __init__(self, message, wealthchange, happinesschange):
         super().__init__(message, wealthchange, happinesschange)
-
 class Wizard(npc):
+    msgs = "WizardMsgs"
     def __init__(self, message, wealthchange, happinesschange):
         super().__init__(message, wealthchange, happinesschange)
-
 class FriendlyWitch(npc):
+    msgs = "FriendlyWitchMsgs"
     def __init__(self, message, wealthchange, happinesschange):
         super().__init__(message, wealthchange, happinesschange)
-
 # AI-Genererte liste av NPC meldinger
 RobotMsgs = [
 "Robot| Beep bloop whir! My circuits require an upgrade, 10 gold please.| -10| 0| 0| -2",
@@ -145,29 +145,7 @@ def random_npc():
     npc_list = [Robot, Warrior, Scientist, Orc, Parrot, Dragon, Mouse, ConstructionWorker, Farmer, Wizard, FriendlyWitch]
     selected_npc = random.choice(npc_list)
     print("selected npc", selected_npc)
-
-    if selected_npc == Robot:
-        selected_msg = random.choice(RobotMsgs)
-    elif selected_npc == Warrior:
-        selected_msg = random.choice(WarriorMsgs)
-    elif selected_npc == Scientist:
-        selected_msg = random.choice(ScientistMsgs)
-    elif selected_npc == Orc:
-        selected_msg = random.choice(OrcMsgs)
-    elif selected_npc == Parrot:
-        selected_msg = random.choice(ParrotMsgs)
-    elif selected_npc == Dragon:
-        selected_msg = random.choice(DragonMsgs)
-    elif selected_npc == Mouse:
-        selected_msg = random.choice(MouseMsgs)
-    elif selected_npc == ConstructionWorker:
-        selected_msg = random.choice(ConstructionWorkerMsgs)
-    elif selected_npc == Farmer:
-        selected_msg = random.choice(FarmerMsgs)
-    elif selected_npc == Wizard:
-        selected_msg = random.choice(WizardMsgs)
-    elif selected_npc == FriendlyWitch:
-        selected_msg = random.choice(FriendlyWitchMsgs)
+    selected_msg = random.choice(globals()[selected_npc.msgs])
     print("selected msg", selected_msg)
     return selected_msg
 
@@ -182,4 +160,4 @@ def gen_npc():
     happinesschange = (int(npcresponse.split("|")[4]), int(npcresponse.split("|")[5]))
 
     # Create the NPC object with the correct name and message
-    return npc(npc_name, npc_message, wealthchange, happinesschange)  # Use npc_name for the name
+    return npc_name, npc_message, wealthchange, happinesschange
