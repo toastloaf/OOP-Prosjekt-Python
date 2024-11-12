@@ -1,5 +1,16 @@
 import random
 
+# Globale variabler for multiplier, jeg fikk hjelp av AI til å lage denne funksjonen.
+multiplier_active = False
+multiplier_value = 1
+multiplier_count = 0
+
+def activate_multiplier(value, count):
+    global multiplier_active, multiplier_value, multiplier_count
+    multiplier_active = True
+    multiplier_value = value
+    multiplier_count = count
+
 class Player:
     def __init__(self, gold, happiness):
         self.gold = gold
@@ -15,6 +26,7 @@ class Robot(npc):
     msgs = "RobotMsgs"
     def __init__(self, message, wealthchange, happinesschange):
         super().__init__(message, wealthchange, happinesschange)
+    activate_multiplier(1.5, 3)
 class Warrior(npc):
     msgs = "WarriorMsgs"
     def __init__(self, message, wealthchange, happinesschange):
@@ -23,6 +35,7 @@ class Scientist(npc):
     msgs = "ScientistMsgs"
     def __init__(self, message, wealthchange, happinesschange):
         super().__init__(message, wealthchange, happinesschange)
+    activate_multiplier(2, 2)
 class Orc(npc):
     msgs = "OrcMsgs"
     def __init__(self, message, wealthchange, happinesschange):
@@ -51,14 +64,17 @@ class Wizard(npc):
     msgs = "WizardMsgs"
     def __init__(self, message, wealthchange, happinesschange):
         super().__init__(message, wealthchange, happinesschange)
+    activate_multiplier(1.1, 5)
 class FriendlyWitch(npc):
     msgs = "FriendlyWitchMsgs"
     def __init__(self, message, wealthchange, happinesschange):
         super().__init__(message, wealthchange, happinesschange)
+    activate_multiplier(1.2, 4)
 class Devil(npc):
     msgs = "DevilMsgs"
     def __init__(self, message, wealthchange, happinesschange):
         super().__init__(message, wealthchange, happinesschange)
+
 # AI-Genererte liste av NPC meldinger
 RobotMsgs = [
 "Robot| Beep bloop whir! My circuits require an upgrade, 10 gold please.| -10| 0| 1| -1",
@@ -152,21 +168,28 @@ DevilMsgs = [
 def random_npc():
     npc_list = [Robot, Warrior, Scientist, Orc, Parrot, Dragon, Mouse, ConstructionWorker, Farmer, Wizard, FriendlyWitch, Devil] # Liste med NPC klassene som skal brukes i spillet.
     selected_npc = random.choice(npc_list)
-    #print("selected npc", selected_npc) # Debug funksjon
     selected_msg = random.choice(globals()[selected_npc.msgs]) # Finn hvilken liste av meldinger som skal brukes, og bruk globals() for å si til python at det er en global variabel som tilhører en liste.
-    #print("selected msg", selected_msg) # Debug funksjon
     return selected_msg
 
 def gen_npc():
+    global multiplier_active, multiplier_count
+
     npcresponse = random_npc()
     npc_message = npcresponse.split("|")[1]
-    #print("bruh moment", npcresponse) # Debug funksjon
     npc_name = npcresponse.split("|")[0]
-    #print("npc name", npc_name) # Debug funksjon
 
     # Konverter tallstrenger til heltall
     wealthchange = (int(npcresponse.split("|")[2]), int(npcresponse.split("|")[3]))
     happinesschange = (int(npcresponse.split("|")[4]), int(npcresponse.split("|")[5]))
+
+    # Bruk multiplier hvis aktiv
+    if multiplier_active:
+        print("Multiplier er nå aktivert med en verdi på", multiplier_value, "og vil vare i", multiplier_count, "runder.")
+        wealthchange = (wealthchange[0] * multiplier_value, wealthchange[1] * multiplier_value)
+        happinesschange = (happinesschange[0] * multiplier_value, happinesschange[1] * multiplier_value)
+        multiplier_count -= 1
+        if multiplier_count <= 0:
+            multiplier_active = False
 
     # Lag NPC objektet med de riktige navn, meldingen og endringene i gold og happiness
     return npc_name, npc_message, wealthchange, happinesschange
