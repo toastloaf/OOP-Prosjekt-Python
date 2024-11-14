@@ -27,6 +27,7 @@ class Robot(npc):
     def __init__(self, message, wealthchange, happinesschange):
         super().__init__(message, wealthchange, happinesschange)
     activate_multiplier(1.5, 3)
+
 class Warrior(npc):
     msgs = "WarriorMsgs"
     def __init__(self, message, wealthchange, happinesschange):
@@ -161,8 +162,8 @@ FriendlyWitchMsgs = [
 ]
 
 DevilMsgs = [
-"Devil| If you want, i can steal from the nearby town and give you the profits! what do you say?| 150| 0| -100| 0",
-"Devil| May i feast off of your kingdom's happiness? ill pay you handsomely for it!| 200| 0| -150| 0",
+"Devil| If you want, i can steal from the nearby town and give you the profits! what do you say?| 150| 0| -60| 0",
+"Devil| May i feast off of your kingdom's happiness? ill pay you handsomely for it!| 200| 0| -80| 0",
 ]
 
 def random_npc():
