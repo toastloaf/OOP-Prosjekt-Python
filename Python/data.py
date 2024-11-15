@@ -27,7 +27,6 @@ class Robot(npc):
     def __init__(self, message, wealthchange, happinesschange):
         super().__init__(message, wealthchange, happinesschange)
     activate_multiplier(1.5, 3)
-
 class Warrior(npc):
     msgs = "WarriorMsgs"
     def __init__(self, message, wealthchange, happinesschange):
