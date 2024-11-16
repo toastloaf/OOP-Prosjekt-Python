@@ -22,11 +22,17 @@ export class Player {
 }
 
 export class NPC {
+    messages: string[]; // Hvor vi lagrer listen av meldinger som NPCen kan si
     wealthchange: number;
     happinesschange: number;
 
-    constructor(wealthchange, happinesschange) {
+    constructor(messages, wealthchange, happinesschange) {
+        this.messages = messages;
         this.wealthchange = wealthchange;
         this.happinesschange = happinesschange;
     }
 }
+
+export const Robot = new NPC(["I am a robot", "Beep boop"], 0, 0);
+
+console.log(Robot.messages[Math.floor(Math.random() * Robot.messages.length)]);
