@@ -14,9 +14,7 @@ def play_the_damn_game():
     happiness_change_on_decline = happinesschange[1]
     gold_change_on_decline = wealthchange[1]
 
-    #print(f"debug time: {happiness_change_on_accept}, {gold_change_on_accept}, {happiness_change_on_decline}, {gold_change_on_decline}")
-
-    choice = input("Y/N: ").lower()
+    choice = input("Accept? Y/N: ").lower()
     if choice == "y":
         print(f"You accepted the request.")
         player.happiness += happiness_change_on_accept
