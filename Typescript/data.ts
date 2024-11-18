@@ -43,7 +43,6 @@ export class NPC {
 
 export class specialNPC extends NPC {
   // Child-klassen til spesial NPCer (multiplier)
-  special: string;
 
   constructor(
     name,
@@ -52,7 +51,6 @@ export class specialNPC extends NPC {
     happinesschangeaccept,
     wealthchangedecline,
     happinesschangedecline,
-    special
   ) {
     super(
       name,
@@ -62,7 +60,6 @@ export class specialNPC extends NPC {
       wealthchangedecline,
       happinesschangedecline
     );
-    this.special = special;
   }
 
   activateMultiplier(value) {
@@ -81,7 +78,7 @@ export class specialNPC extends NPC {
 function handleChoice(
   // Ved hjelp av AI (Claude 3.5 Sonnet), lagde jeg denne funksjonen, slik at vi kan bruke den for både vanlige og spesielle NPCer.
   // Dette gjør koden mer lesbar og enklere å forstå, med en veldig stor reduksjon i antall linjer og repetisjon.
-  // Hvis du vil se hvordan koden ser ut uten denne funkjsonen, finner du det i GitHub historikken.
+  // Hvis du vil se hvordan koden ser ut uten denne funksjonen, finner du det i GitHub-historikken.
   npc: NPC | specialNPC,
   happiness: number,
   gold: number
@@ -112,10 +109,10 @@ export function newRound(happiness: number, gold: number): [number, number] {
       random_npc.happinesschangeaccept,
       random_npc.wealthchangedecline,
       random_npc.happinesschangedecline,
-      random_npc.special
     );
     const multiplier = Math.round((Math.random() * (3 - 1) + 1) * 10) / 10; // Random tall mellom 1 og 3, skrives rart på grunn av avrunding i TypeScript.
-    // Runder av til 1 desimal for å unngå store floating point tall.
+    // Vi runder av til 1 desimal for å unngå store floating point tall.
+
     special_npc.activateMultiplier(multiplier);
 
     console.log(`${special_npc.name}: ${special_npc.message}`);
