@@ -1,5 +1,5 @@
 // Importer alle klasser og metoder fra data.ts og sqlite fra Bun (krever at du bruker Bun, fungerer ikke med node.js)
-import { Player, NPC , newRound} from "./data";
+import { Player, newRound} from "./data";
 
 let player = new Player(100, 100); // Opprett et nytt Player objekt med 100 gold og 100 happiness
 
